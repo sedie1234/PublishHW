@@ -45,7 +45,7 @@ public:
       MLIRContext *context,
       const IREE::HAL::TargetRegistry &targetRegistry) const override {
     // 기본 구현 (필요에 따라 수정)
-    return IREE::HAL::DeviceTargetAttr::get(context, "hw1ir");
+    return IREE::HAL::DeviceTargetAttr::get(context, "keti_hw1");
   }
 
 // void buildDeviceTargetPassPipeline(
@@ -61,15 +61,15 @@ class HW1TargetBackend : public IREE::HAL::TargetBackend {
 public:
   HW1TargetBackend(const HW1Options options) : options(std::move(options)) {}
 
-  std::string getLegacyDefaultDeviceID() const override { return "hw1ir"; }
+  std::string getLegacyDefaultDeviceID() const override { return "keti_hw1"; }
 
   void getDefaultExecutableTargets(
       MLIRContext *context, llvm::StringRef deviceID, mlir::DictionaryAttr configAttr,
       llvm::SmallVectorImpl<IREE::HAL::ExecutableTargetAttr> &targetAttrs) const override {
     targetAttrs.push_back(IREE::HAL::ExecutableTargetAttr::get(
       context, 
-      StringAttr::get(context, "hw1ir"), 
-      StringAttr::get(context, "hw1ir-format"), 
+      StringAttr::get(context, "keti_hw1"), 
+      StringAttr::get(context, "keti_hw1-format"), 
       configAttr));
   }
 

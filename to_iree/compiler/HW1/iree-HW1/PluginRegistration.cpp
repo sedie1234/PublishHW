@@ -1,11 +1,14 @@
 // hardware aware operations plugin registration
-// #include "HW1/Dialect/HW1IR/HW1IRDialect.h"
-// #include "HW1/HW1IR/Passes.h"
+#include "HW1/Dialect/HW1IR/HW1IRDialect.h"
+#include "HW1/Conversion/Passes.h"
+
+#include "HW1IR/Passes.h"
 
 // iree aware plugin registration
 #include "iree-HW1/IR/HW1Dialect.h"
 #include "iree-HW1/Target/HW1Target.h"
 #include "iree-HW1/Transforms/Passes.h"
+
 
 // iree compiler core plugin registration
 #include "iree/compiler/Dialect/HAL/Target/TargetRegistry.h"
@@ -27,11 +30,11 @@ struct HW1Session
                            PluginActivationPolicy::DefaultActivated> {
   static void registerPasses() {
     HW1::registerHW1Passes(); 
-    // HW1::registerHW1IRPasses();
+    HW1::registerHW1IRPasses();
   }
 
   void onRegisterDialects(DialectRegistry &registry) override {
-    // registry.insert<keti::hw1ir::HW1IRDialect>();
+    registry.insert<keti::hw1ir::hw1irDialect>();
   }
 
   void populateHALTargetDevices(IREE::HAL::TargetDeviceList &targets) override {
