@@ -12,6 +12,10 @@ iree_cc_library(
         ${IREE_MLIR_HW1_SOURCE_DIR}/include
         ${IREE_LLVM_PROJECT_SOURCE_DIR}/mlir/include
         ${IREE_LLVM_PROJECT_BINARY_DIR}/tools/mlir/include
+        # "$<BUILD_INTERFACE:${IREE_SOURCE_DIR}/third_party/llvm-project/mlir/include>"
+        # "$<BUILD_INTERFACE:${IREE_BINARY_DIR}/third_party/llvm-project/mlir/include>"
+        # "$<BUILD_INTERFACE:${IREE_SOURCE_DIR}/third_party/llvm-project/llvm/include>"
+        # "$<BUILD_INTERFACE:${IREE_BINARY_DIR}/third_party/llvm-project/include>"
 )
 
 #########################################################
@@ -32,8 +36,8 @@ iree_tablegen_library(
     TD_FILE
         "${IREE_MLIR_HW1_SOURCE_DIR}/include/HW1/Dialect/HW1IR/HW1IR.td"
     OUTS
-        -gen-op-decls Dialect/HW1IR/HW1IR.h.inc
-        -gen-op-defs Dialect/HW1IR/HW1IR.cpp.inc
+        -gen-op-decls Dialect/HW1IR/HW1IROps.h.inc
+        -gen-op-defs Dialect/HW1IR/HW1IROps.cpp.inc
 
     INCLUDE_DIRS
         ${IREE_MLIR_HW1_SOURCE_DIR}/include
@@ -67,6 +71,7 @@ iree_tablegen_library(
         "${IREE_MLIR_HW1_SOURCE_DIR}/include/HW1/Conversion/Passes.td"
     OUTS
         -gen-pass-decls Conversion/Passes.h.inc
+
 )
 
 ##### transform ops example #####
@@ -86,13 +91,15 @@ iree_tablegen_library(
 
 iree_cc_library(
     NAME
-        HW1IRDialectIR
+        HW1IRDialect
     SRCS
         ${IREE_MLIR_HW1_SOURCE_DIR}/lib/HW1/Dialect/HW1IR//IR/HW1IRDialect.cpp
     INCLUDES
         # ${CMAKE_BINARY_DIR}/compiler/plugins/HW1
         ${CMAKE_CURRENT_BINARY_DIR}
         ${IREE_MLIR_HW1_SOURCE_DIR}/include
+        # ${IREE_LLVM_PROJECT_SOURCE_DIR}/mlir/include
+        # ${IREE_LLVM_PROJECT_BINARY_DIR}/tools/mlir/include
 
     DEPS
         ::defs
@@ -100,6 +107,7 @@ iree_cc_library(
         ::HW1IRInterfaceGen
         # ::HW1IRTransformationOpsGen
         ::HW1IRConversionPassesIncGen
+        MLIRIR
 )
 
 #########################################################
@@ -139,7 +147,7 @@ iree_cc_library(
         ::HW1IRConversionPassHeaders
         # ::HW1IRTransform
         # ::HW1IRTransformOps
-        ::HW1IRDialectIR
+        ::HW1IRDialect
         MLIRIR
         MLIRLinalgTransforms
         MLIRLinalgUtils

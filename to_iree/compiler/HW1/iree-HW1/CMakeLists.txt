@@ -16,21 +16,29 @@ iree_cc_library(
     SRCS
         "PluginRegistration.cpp"
     DEPS
+
+        # IREE
         iree::compiler::Dialect::HAL::Target
         iree::compiler::PluginAPI
 
-        # iree::base::core_headers
-        # iree::base::internal::flatcc::building
+        # MLIR
         MLIRIR
         MLIRPass
 
+        # definitions
         ::defs
         
+        # for plugin
         iree::compiler::PluginAPI
 
+        # IR for iree
         iree::target::hw1::IR::HW1Dialect
         iree::target::hw1::target::Target
         iree::target::hw1::Transforms
+
+        # IR for hw
+        iree::target::hw1::hw1ir::HW1IRDialect
+        iree::target::hw1::hw1ir::HW1IRPasses
 
     PUBLIC
 )

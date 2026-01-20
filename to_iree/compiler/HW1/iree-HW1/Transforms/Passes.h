@@ -1,7 +1,7 @@
 #ifndef IREE_HW1_TRANSFORMS_PASSES_H_
 #define IREE_HW1_TRANSFORMS_PASSES_H_
 
-// #include "HW1/iree-HW1/Transforms/PassDetail.h"
+// #include "iree-HW1/Transforms/PassDetail.h"
 #include "mlir/Pass/Pass.h"
 
 namespace mlir::iree_compiler::HW1 {
