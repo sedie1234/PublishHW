@@ -3,9 +3,9 @@
 
 include "mlir/IR/OpBase.td"
 
-def HW1_Dialect : Dialect {
+def HW1Dialect : Dialect {
   let name = "hw1";
-  let cppNamespace = "::mlir::iree_compiler::keti::hw1";
+  let cppNamespace = "::mlir::iree_compiler::HW1";
   let summary = "HW1 Hardware Dialect";
   let hasConstantMaterializer = 1; // 필요 시 추가
 }

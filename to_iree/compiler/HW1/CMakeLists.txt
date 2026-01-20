@@ -1,8 +1,7 @@
-include_directories(("${IREE_MLIR_HW1_SOURCE_DIR}/include"))
+# include_directories("${IREE_MLIR_HW1_SOURCE_DIR}/include")
 
-iree_setup_c_src_root(
-    PACKAGE_ROOT_PREFIX iree::target
-    IMPLICIT_DEFS_TARGET iree_target_hw1_compiler_defs
-)
-add_subdirectory(iree_HW1)
-add_subdirectory(HW1IR)
+set(IREE_HW1_COMPILER_SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE INTERNAL "")
+set(IREE_HW1_COMPILER_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}" CACHE INTERNAL "")
+
+add_subdirectory(iree-HW1)
+# add_subdirectory(HW1IR)

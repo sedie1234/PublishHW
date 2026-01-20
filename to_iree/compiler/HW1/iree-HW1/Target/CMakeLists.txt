@@ -1,5 +1,5 @@
-iree_add_all_subdirs()
-
+set(IREE_PACKAGE_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}")
+set(IREE_PACKAGE_ROOT_PREFIX "iree::target::hw1::target")
 
 iree_cc_library(
     NAME
@@ -8,11 +8,12 @@ iree_cc_library(
         "HW1Target.h"
     SRCS
         "HW1Target.cpp"
+    INCLUDES
+        "$<BUILD_INTERFACE:${IREE_HW1_COMPILER_SOURCE_DIR}>"
+        "$<BUILD_INTERFACE:${IREE_HW1_COMPILER_BINARY_DIR}>"
     DEPS
-        ::HW1Dialect
-        iree::base::internal::flatcc::building
-        iree::base::internal::flatcc::parsing
         iree::compiler::Dialect::HAL::Target
         MLIRLLVMDialect
+    PUBLIC
 )
 

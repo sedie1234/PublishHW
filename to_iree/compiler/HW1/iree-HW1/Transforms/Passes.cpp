@@ -2,7 +2,7 @@
 
 // #include "HW1/iree-HW1/Transforms/Passes.h"
 
-#include "HW1/Conversion/ConvertToHW1IRPass.h"
+// #include "HW1/Conversion/ConvertToHW1IRPass.h"
 
 #include "iree-dialects/Dialect/LinalgTransform/Passes.h"
 #include "iree/compiler/Codegen/Common/Passes.h"
@@ -23,10 +23,10 @@
 
 namespace mlir::iree_compiler::HW1{
 
-// namespace {
-// #define GEN_PASS_REGISTRATION
-// #include "HW1/iree-HW1/Transforms/Passes.h.inc"
-// }  // namespace
+namespace {
+#define GEN_PASS_REGISTRATION
+#include "iree-HW1/Transforms/Passes.h.inc"
+}  // namespace
 
 void registerHW1Passes() {
   // Generated.

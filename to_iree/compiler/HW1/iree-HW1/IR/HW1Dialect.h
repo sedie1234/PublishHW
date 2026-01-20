@@ -10,7 +10,7 @@
 #include "mlir/Support/TypeID.h"
 
 
-#include "HW1/iree-HW1/IR/HW1Dialect.h.inc" 
+#include "iree-HW1/IR/HW1Dialect.h.inc" 
 
 
 #endif // IREE_COMPILER_HW1_DIALECT_IREEHW1_DIALECT_H_

@@ -4,10 +4,11 @@
 include "mlir/IR/OpBase.td"
 include "mlir/IR/AttrTypeBase.td"
 
+include "HW1Dialect.td"
 
 // base op
 class HW1_Op<string mnemonic, list<Trait> traits = []> :
-    Op<HW1_Dialect, mnemonic, traits>;
+    Op<HW1Dialect, mnemonic, traits>;
 
 // custom type
 // def HW1_BufferType : TypeDef<HW1_Dialect, "Buffer"> {

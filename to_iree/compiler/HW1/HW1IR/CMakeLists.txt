@@ -9,7 +9,9 @@ iree_cc_library(
     NAME
         defs
     INCLUDES
-        "${IREE_MLIR_HW1_SOURCE_DIR}/include"
+        ${IREE_MLIR_HW1_SOURCE_DIR}/include
+        ${IREE_LLVM_PROJECT_SOURCE_DIR}/mlir/include
+        ${IREE_LLVM_PROJECT_BINARY_DIR}/tools/mlir/include
 )
 
 #########################################################
@@ -32,12 +34,13 @@ iree_tablegen_library(
     OUTS
         -gen-op-decls Dialect/HW1IR/HW1IR.h.inc
         -gen-op-defs Dialect/HW1IR/HW1IR.cpp.inc
-        -gen-dialect-decls Dialect/HW1IR/HW1IRDialect.h.inc --dialect=hw1ir #??
-        -gen-dialect-defs Dialect/HW1IR/HW1IRDialect.cpp.inc --dialect=hw1ir #??
-        -gen-typedef-decls Dialect/HW1IR/HW1IRTypes.h.inc #??
-        -gen-typedef-defs Dialect/HW1IR/HW1IRTypes.cpp.inc #??
-        -gen-enum-decls Dialect/HW1IR/HW1IREnums.h.inc #??
-        -gen-enum-defs Dialect/HW1IR/HW1IREnums.cpp.inc #??
+
+    INCLUDE_DIRS
+        ${IREE_MLIR_HW1_SOURCE_DIR}/include
+        ${IREE_LLVM_PROJECT_SOURCE_DIR}/mlir/include
+        #        ${IREE_LLVM_PROJECT_BINARY_DIR}/tools/mlir/include
+    DEPS
+        ::defs
         
 )
 
@@ -49,6 +52,12 @@ iree_tablegen_library(
     OUTS
         -gen-op-interface-decls Dialect/HW1IR/HW1IRInterface.h.inc
         -gen-op-interface-defs Dialect/HW1IR/HW1IRInterface.cpp.inc
+        -gen-dialect-decls Dialect/HW1IR/HW1IRDialect.h.inc --dialect=hw1ir #??
+        -gen-dialect-defs Dialect/HW1IR/HW1IRDialect.cpp.inc --dialect=hw1ir #??
+        -gen-typedef-decls Dialect/HW1IR/HW1IRTypes.h.inc #??
+        -gen-typedef-defs Dialect/HW1IR/HW1IRTypes.cpp.inc #??
+        -gen-enum-decls Dialect/HW1IR/HW1IREnums.h.inc #??
+        -gen-enum-defs Dialect/HW1IR/HW1IREnums.cpp.inc #??
 )
 
 iree_tablegen_library(
@@ -80,6 +89,11 @@ iree_cc_library(
         HW1IRDialectIR
     SRCS
         ${IREE_MLIR_HW1_SOURCE_DIR}/lib/HW1/Dialect/HW1IR//IR/HW1IRDialect.cpp
+    INCLUDES
+        # ${CMAKE_BINARY_DIR}/compiler/plugins/HW1
+        ${CMAKE_CURRENT_BINARY_DIR}
+        ${IREE_MLIR_HW1_SOURCE_DIR}/include
+
     DEPS
         ::defs
         ::HW1IRDialectGen
