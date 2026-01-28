@@ -142,6 +142,8 @@ iree_cc_library(
     SRCS
         "ConversionPasses.cpp"
         "${IREE_MLIR_HW1_SOURCE_DIR}/lib/HW1/Conversion/ConvertToHW1IRPass.cpp"
+    INCLUDES
+        "${IREE_MLIR_HW1_SOURCE_DIR}/include"
     DEPS
         ::defs
         ::HW1IRConversionPassHeaders

@@ -1,6 +1,10 @@
 set(IREE_PACKAGE_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}")
 set(IREE_PACKAGE_ROOT_PREFIX "iree::target::hw1::target")
 
+list(APPEND IREE_COMPILER_TABLEGEN_INCLUDE_DIRS
+    "${IREE_MLIR_HW1_SOURCE_DIR}/include"
+)
+
 iree_cc_library(
     NAME
         Target
@@ -14,6 +18,7 @@ iree_cc_library(
     DEPS
         iree::compiler::Dialect::HAL::Target
         MLIRLLVMDialect
+        iree::target::hw1::hw1ir::HW1IRConversionPasses
     PUBLIC
 )
 

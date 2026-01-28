@@ -5,6 +5,9 @@
 #include <utility>
 
 // #include "HW1/Dialect/HW1IR/HW1IRDialect.h"
+// #include "HW1IR/Passes.h"
+#include "HW1/Conversion/Passes.h"
+
 #include "iree-HW1/IR/HW1Dialect.h"
 #include "iree-HW1/Transforms/Passes.h"
 #include "iree-HW1/Target/HW1Target.h"
@@ -77,7 +80,13 @@ public:
   void buildTranslationPassPipeline(IREE::HAL::ExecutableTargetAttr targetAttr,
                                     OpPassManager &passManager) override {
     // 여기에 패스 추가
-    // passManager.addPass(mlir::createLinalgToMyHWPass()); 
+    // passManager.addPass(mlir::createLinalgToHW1Pass());
+    
+    // here is hal.executable.variant section (passManager = variant pass manager)
+    OpPassManager &modulePassManager = passManager.nest<mlir::ModuleOp>();
+
+    // here is builtin.module section in variant
+    modulePassManager.addPass(keti::hw1ir::createLinalgToHW1Pass()); 
     llvm::errs() << "HW1: Pipeline is being built\n";
   }
 
