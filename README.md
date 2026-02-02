@@ -4,7 +4,7 @@
 
 # IREE build with test HWIR & compile model example
 
-0. 환경
+## 0. 환경
 
 - python3.11 환경 (venv를 이용하여 환경 구성)
 - torch-mlir 설치
@@ -16,7 +16,7 @@ $ pip install --pre torch-mlir torchvision \
       onnx protobuf
 ```
 
-1. build
+## 1. build
 
 - ninja를 이용하여 make 파일을 생성
 ```
@@ -42,7 +42,7 @@ $ cmake --build ./build -j$(nproc)
 
 
 
-2. compile용 모델 준비
+## 2. compile용 모델 준비
 - iree에 들어갈 수 있는 형태의 mlir로 변환 (torch mlir, TOSA, stableHLO)
 - iree의 툴을 이용하기 위해 공식으로 release된 iree의 툴 설치
 ```
@@ -60,7 +60,7 @@ $ iree-import-onnx \
 ```
 
 
-3. 모델 컴파일
+## 3. 모델 컴파일
 - 최종 바이너리는 .vmfb 파일이다.
 - 아래는 컴파일과 동시에 이 환경을 활용하여 개발하기 위해 모든 변환패스 적용과정을 프린트하도록 설정되어 있음.
 ```
